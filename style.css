@@ -1,3 +1,18 @@
+:root{
+    --clr-1: #f337bd;
+    --clr-2: #fb3977;
+    --clr-3: #db35e3;
+    --clr-4: #8670fb;
+    --clr-5: #2588f8;
+    --clr-6: #a958ff;
+}
+
+@property --gradient-angle{
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -5,59 +20,90 @@
 }
 
 body{
+    height: 100vmin;
     text-align: center;
-    background-color: #ef476f;
+    background-color: black;
+    display: grid;
+    place-content: center;
 }
 
 .game_container{
-    height: 90vh;
+    height: 85vmin;
     margin-top: 1vmin;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2vmin;
-    /* background-color: aliceblue; */
 }
 
 #heading{
     font-size: 10vmin;
-    color: #052631;
-    /* background-color: aqua; */
+    color: var(--clr-1);
+    margin-bottom: 0.5vmin;
 }
 
 .game{
-    height: 60vmin;
+    height:60vmin;
     width: 60vmin;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    column-gap: 2.5vmin;
-    /* background-color: bisque; */
+    gap: 3.5vmin;
 }
 
 .box{
     height: 17vmin;
     width: 17vmin;
-    border: none;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(0,0,0,0.3);
-    background-color: #ffd166;
-    color: black;
+    border-radius: 1vmin;
+    color: var(--clr-1);
+    background-color: black;
     font-size: 10vmin;
+    position: relative;
 }
+
+.box::before,
+.box::after{
+    content: "";
+    position: absolute;
+    inset: -.4rem;
+    z-index: -1;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        var(--clr-1),
+        var(--clr-2),
+        var(--clr-3),
+        var(--clr-4),
+        var(--clr-5),
+        var(--clr-6),
+        var(--clr-1)
+    );
+    border-radius: inherit;
+    animation: rotation 5s linear infinite;
+}
+
+@keyframes rotation{
+    0% {--gradient-angle: 0deg;}
+    100%{--gradient-angle: 360deg;}
+} 
 
 #reset_button{
     height: 6.5vmin;
     width: 17vmin;
-    margin-top: 1vmin;
+    margin-top: 2.25vmin;
     font-size: 3vmin;
     font-weight: 600;
     border: none;
     border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(0,0,0,0.3);
-    background-color: #06d6a0;
+    background: conic-gradient(
+        from 45deg,
+        var(--clr-1),
+        var(--clr-4),
+        var(--clr-5),
+        var(--clr-6),
+        var(--clr-1)
+    );
 }
 
 .winner_message{
@@ -66,7 +112,7 @@ body{
 
 #msg{
     font-size: 10vmin;
-    color: #052631;
+    color: var(--clr-1);
 }
 
 .hide{
